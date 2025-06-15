@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Fork & Fantasy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display:wght@700&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Playfair Display', serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow-x: hidden;
+      background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+      position: relative;
+      color: white;
+      padding-bottom: 60px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      background: linear-gradient(90deg, #ff4f8b, #20a1b2);
+      padding: 12px 0;
+      z-index: 2;
+      position: relative;
+    }
+
+    .tabs label {
+      color: white;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .tabs label:hover {
+      background: rgba(255, 255, 255, 0.2);
+      text-shadow: 0 0 6px #fff;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 40px 20px;
+      min-height: 80vh;
+      position: relative;
+    }
+
+    input#tab1:checked~#content1,
+    input#tab2:checked~#content1,
+    input#tab3:checked~#content2,
+    input#tab4:checked~#content3,
+    input#tab5:checked~#content4 {
+      display: block;
+    }
+
+    .title-box {
+      background-color: rgba(52, 38, 56, 0.8);
+      border: 2px solid #c0a062;
+      border-radius: 15px;
+      color: antiquewhite;
+      text-align: center;
+      padding: 20px 20px 40px;
+      width: 550px;
+      height: 180px;
+      max-width: 500px;
+      margin: 10px auto 20px;
+      animation: floatUp 4s ease-in-out infinite;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 0 15px #c0a06288;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 42px;
+      color: #ffffff;
+      text-shadow: 0 0 8px #ff4f8b, 0 0 16px #ff4f8b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .logo-inline {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: drop-shadow(0 0 8px gold);
+      border: 2px solid #fff8dc;
+    }
+
+    .icon {
+      font-size: 42px;
+      animation: sparkle 2s infinite ease-in-out;
+      color: #ffffff;
+      text-shadow: 0 0 6px gold, 0 0 12px gold;
+    }
+
+    .subline {
+      font-size: 20px;
+      color: #fce5dc;
+      margin-top: 15px;
+      font-style: italic;
+      text-shadow: 0 0 6px #fff;
+    }
+
+    @keyframes sparkle {
+
+      0%,
+      100% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: rotate(10deg) scale(1.1);
+        opacity: 0.7;
+      }
+    }
+
+    @keyframes floatUp {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .menu-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .menu-card {
+      width: 350px;
+      height: 120px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid #4fcdff;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 12px #4fcdff80;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .menu-card:hover {
+      transform: scale(1.08);
+      background-color: #4fcdff;
+      box-shadow: 0 0 25px #4fcdff;
+      color: black;
+    }
+
+    .contact-box {
+      background-color: rgba(52, 38, 56, 0.8);
+      border: 2px solid #c0a062;
+      border-radius: 15px;
+      color: antiquewhite;
+      text-align: center;
+      padding: 20px;
+      width: 90%;
+      max-width: 600px;
+      margin: auto;
+      animation: pulseGlow 3s infinite ease-in-out;
+      box-shadow: 0 0 12px #c0a06299;
+    }
+
+    @keyframes pulseGlow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 12px #c0a06299;
+      }
+
+      50% {
+        box-shadow: 0 0 20px #c0a062;
+      }
+    }
+
+    .scroll-strip {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 50px;
+      background-color: #f5f5f5aa;
+      overflow: hidden;
+      z-index: 999;
+    }
+
+    .strip-content {
+      display: flex;
+      width: max-content;
+      animation: stripScroll 30s linear infinite;
+    }
+
+    .strip-item {
+      display: flex;
+    }
+
+    .strip-item span {
+      padding: 0 30px;
+      font-size: 16px;
+      color: #222;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    @keyframes stripScroll {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .flipbook {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      padding: 20px;
+    }
+
+    .flip {
+      position: relative;
+      width: 400px;
+      height: 200px;
+      perspective: 1000px;
+    }
+
+    .flip input {
+      display: none;
+    }
+
+    .flip-page {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      backface-visibility: hidden;
+      border: 2px solid #ff4f8b;
+      border-radius: 12px;
+      padding: 20px;
+      font-size: 18px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff4f8b99, #20a1b299);
+      box-shadow: 0 0 15px #ff4f8b80;
+      transition: transform 1s;
+      cursor: pointer;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .flip-page span {
+      display: block;
+      margin-top: 10px;
+      font-style: italic;
+      font-size: 14px;
+      color: #fff8dc;
+    }
+
+    .flip-page.back {
+      transform: rotateY(180deg);
+      background: linear-gradient(135deg, #20a1b299, #ff4f8b99);
+      box-shadow: 0 0 15px #20a1b280;
+    }
+
+    .flip input:checked~.front {
+      transform: rotateY(180deg);
+    }
+
+    .flip input:checked~.back {
+      transform: rotateY(0deg);
+    }
+
+    .neon-box {
+      position: absolute;
+      width: 400px;
+      color: #fff;
+      font-size: 14px;
+      text-align: center;
+      line-height: 20px;
+      overflow: visible;
+      padding: 10px 20px;
+      margin-left: 400px;
+      margin-top: 100px;
+    }
+
+    .neon-box span {
+      display: block;
+      position: relative;
+      padding: 20px;
+      background: #000;
+      border-radius: 15px;
+      width: 450px;
+      height: 200px;
+      z-index: 1;
+    }
+
+    /* Glow corners */
+    .neon-box::before,
+    .neon-box::after,
+    .neon-box span::before,
+    .neon-box span::after {
+      content: "";
+      position: absolute;
+      background: #0ff;
+      transition: 0.5s;
+      box-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+    }
+
+    .neon-box::before,
+    .neon-box::after {
+      height: 2px;
+      width: 0%;
+      left: 0;
+    }
+
+    .neon-box::before {
+      top: 0;
+    }
+
+    .neon-box::after {
+      bottom: 0;
+    }
+
+    .neon-box span::before,
+    .neon-box span::after {
+      width: 2px;
+      height: 0%;
+      top: 0;
+    }
+
+    .neon-box span::before {
+      left: 0;
+    }
+
+    .neon-box span::after {
+      right: 0;
+    }
+
+    .neon-box:hover::before,
+    .neon-box:hover::after {
+      width: 100%;
+    }
+
+    .neon-box:hover span::before,
+    .neon-box:hover span::after {
+      height: 100%;
+    }
+
+
+    .book {
+      width: 370px;
+      height: 350px;
+      position: relative;
+      transform-style: preserve-3d;
+      perspective: 1500px;
+    }
+
+
+
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    .page {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      color: #111;
+      padding: 30px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 1s, z-index 1s;
+      transform-origin: left;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 50px;
+      margin-left: 500px;
+    }
+
+    .page label {
+      cursor: pointer;
+    }
+
+    /* Initial page stack */
+    .page1 {
+      z-index: 5;
+    }
+
+    .page2 {
+      z-index: 4;
+    }
+
+    .page3 {
+      z-index: 3;
+    }
+
+    .page4 {
+      z-index: 2;
+    }
+
+    .page5 {
+      z-index: 1;
+    }
+
+    /* Flip each page based on checkbox */
+    #p1:checked~.book .page1 {
+      transform: rotateY(-180deg);
+      z-index: 0;
+    }
+
+    #p2:checked~.book .page2 {
+      transform: rotateY(-180deg);
+      z-index: 0;
+    }
+
+    #p3:checked~.book .page3 {
+      transform: rotateY(-180deg);
+      z-index: 0;
+    }
+
+    #p4:checked~.book .page4 {
+      transform: rotateY(-180deg);
+      z-index: 0;
+    }
+
+    #p5:checked~.book .page5 {
+      transform: rotateY(-180deg);
+      z-index: 0;
+    }
+
+    h2 {
+      position: absolute;
+      top: -50px;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      font-family: cursive;
+    }
+
+    .book-star {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .book-star span {
+      font-size: 28px;
+      color: gold;
+      display: inline-block;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+
+    .book-star span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .book-star span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    .book-star span:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+
+    .book-star span:nth-child(5) {
+      animation-delay: 0.8s;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+
+      50% {
+        transform: scale(1.3);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+    }
+
+    .review-title {
+      position: relative;
+      top: 50px;
+      text-align: center;
+      font-family: 'Dancing Script', cursive;
+      font-size: 36px;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+
+    .card-container {
+      perspective: 1000px;
+    }
+
+    .payment-card {
+      width: 450px;
+      height: 300px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #141e30, #243b55);
+      color: white;
+      padding: 20px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease;
+      margin-left: 450px;
+      margin-top: 100px;
+    }
+
+    .card-container:hover .payment-card {
+      transform: rotateY(15deg) rotateX(10deg);
+    }
+
+    .chip {
+      width: 50px;
+      height: 35px;
+      background: gold;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+
+    .content {
+      font-family: 'Times New Roman';
+      font-size: 16px;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      padding: 10px, 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <input type="radio" name="tabs" id="tab1" checked>
+  <input type="radio" name="tabs" id="tab2">
+  <input type="radio" name="tabs" id="tab3">
+  <input type="radio" name="tabs" id="tab4">
+  <input type="radio" name="tabs" id="tab5">
+
+  <div class="tabs">
+    <label for="tab1">Click on each button to explore more:</label>
+    <label for="tab2">🍽️ Menu</label>
+    <label for="tab3">📝 Reviews</label>
+    <label for="tab4">💳 Payment</label>
+    <label for="tab5">📞 Contact</label>
+  </div>
+
+  <!-- Tab 1 -->
+  <div class="tab-content" id="content1">
+    <div class="title-box">
+      <h1>
+        <span class="icon">🍴</span> Fork & Fantasy <span class="icon">✨</span>
+        <img src="logo.png" alt="Fork & Fantasy Logo" class="logo-inline">
+      </h1>
+      <div class="subline">Where Taste Meets Imagination</div>
+    </div>
+    <div class="menu-section">
+      <a href="starters.html" class="menu-card">Starters🥣:Kick off your meal with a burst of flavors</a>
+      <a href="main.html" class="menu-card">Main Course🍽️:Hearty dishes for every craving</a>
+      <a href="ice.html" class="menu-card">Ice Creams🍨:Chill out with frozen delight</a>
+      <a href="desserts.html" class="menu-card">Desserts🍮:Indulge in sweet perfection</a>
+      <a href="beverages.html" class="menu-card">Beverages🧃:Sip into refreshing flavors</a>
+    </div>
+  </div>
+
+
+  <!-- Tab 2: Reviews  -->
+  <div class="tab-content" id="content2">
+    <input type="checkbox" id="p1" />
+    <input type="checkbox" id="p2" />
+    <input type="checkbox" id="p3" />
+    <input type="checkbox" id="p4" />
+    <input type="checkbox" id="p5" />
+
+    <!-- Checkboxes for controlling flip -->
+    <input type="checkbox" id="p1" />
+    <input type="checkbox" id="p2" />
+    <input type="checkbox" id="p3" />
+    <input type="checkbox" id="p4" />
+    <input type="checkbox" id="p5" />
+    <h2 class="review-title">REVIEWS</h2>
+    <div class="book">
+      <label class="page page1" for="p1">
+        <div>
+          <strong>"A Delightful Experience!"</strong>– Priya Menon<br><br>
+          “The ambiance was beautiful and calming.<br>Paneer Butter Masala was out of this world!<br>Will definitely
+          come
+          back with family."
+          <div class="book-star">
+            <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+          </div>
+        </div>
+      </label>
+
+      <label class="page page2" for="p2">
+        <div>
+          <strong>"Creative Menu & Delicious Taste"</strong>– Arjun R.<br><br>
+          “Felt like reading a story!<br>Every dish had a unique twist,<br>especially the Butterscotch Crunch ice
+          cream.”
+          <div class="book-star">
+            <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+          </div>
+        </div>
+      </label>
+
+      <label class="page page3" for="p3">
+        <div>
+          <strong>"Perfect for Date Nights"</strong>– Meera & Karan<br><br>
+          “The lighting, food presentation, and music<br>made it perfect for a romantic dinner.<br>Loved the Strawberry
+          Cheesecake Ice Cream!”
+          <div class="book-star">
+            <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+          </div>
+        </div>
+      </label>
+
+      <label class="page page4" for="p4">
+        <div>
+          <strong>"Family Friendly & Yummy"</strong>– Nisha Patel<br><br>
+          “Kids enjoyed every bite,<br>especially the Chocolate Lava Cake.<br>Staff was polite and patient!”
+          <div class="book-star">
+            <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+          </div>
+        </div>
+      </label>
+
+      <label class="page page5" for="p5">
+        <div>
+          <strong>"Affordable Luxury"</strong>– Rahul Jain<br><br>
+          “Great food at a decent price.<br>The Veg Biryani was flavorful.<br>Felt like fine dining without burning the
+          wallet.”
+          <div class="book-star">
+            <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+
+  <!-- Tab 3 -->
+  <div class="tab-content" id="content3">
+    <h2 class="review-title">PAYMENT DETAILS</h2>
+    <div class="card-container">
+      <div class="payment-card">
+        <div class="chip"></div>
+        <div class="card-number">1234 5678 9012 3456</div>
+        <img src="qr.png" Width="120px" height="120" style="float:right;margin-right: 0px;">
+        <h3>💳 Payment Info:</h3>
+        <p><strong>Bank:</strong> AGD National Bank</p>
+        <p><strong>Account No:</strong> 1234567890</p>
+        <p><strong>IFSC:</strong> FAF0001234</p>
+        <p><strong>UPI ID:</strong> forkandfantasy@upi</p>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <!-- Tab 4 -->
+  <div class="tab-content" id="content4">
+    <h2 class="review-title">CONTACT DETAILS</h2>
+    <div class="neon-box">
+      <span>
+        <div class="content">
+          <img src="cologo.jpg" Width="120px" height="120" style="float:right;margin-right: 0px;">
+          <p>Thank you!</p>
+          <p>CLICK ON IT TO CONTACT</p>
+          <p>☎️ +91 9876543210 </p>
+          <p>📧 diya2412@gmail.com</p>
+          <p>9th Street, Avenue Park, Chennai - 600085</p>
+
+        </div>
+      </span>
+    </div>
+  </div>
+
+    <!-- Scroll Strip -->
+    <div class="scroll-strip">
+      <div class="strip-content">
+        <div class="strip-item">
+          <span>⭐ Working hours: 9am-9pm</span>
+          <span>🎉 Sunday holiday</span>
+          <span>🎵 Live Music Tonight</span>
+          <span>🍷 Wine Pairing Event</span>
+        </div>
+        <div class="strip-item">
+          <span>⭐ Working hours: 9am-9pm</span>
+          <span>🎉 Sunday holiday</span>
+          <span>🎵 Live Music Tonight</span>
+          <span>🍷 Wine Pairing Event</span>
+        </div>
+      </div>
+    </div>
+
+</body>
+
+</html>
